@@ -17,22 +17,13 @@ import (
 
 func main() {
 	go func() {
-		progress := 0.0
 		logo, err := assets.GetLogo()
 		if err != nil {
 			fmt.Println(fmt.Errorf("failed to read image data: %w", err))
 			os.Exit(0)
 		}
-		splashWidget := splash.NewSplash(
-			logo,
-			image.Rectangle{
-				Min: image.Pt(100, 340),
-				Max: image.Pt(540, 350),
-			},
-			color.NRGBA{R: 100, G: 200, B: 100, A: 42},
-		)
+		size := logo.Bounds().Size()
 
-		size := image.Point{X: 640, Y: 360}
 		options := []app.Option{
 			app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
 			app.Title("Splash Example"),
@@ -42,6 +33,15 @@ func main() {
 		//w.Option(options...)
 		w.Perform(system.ActionCenter)
 
+		splashWidget := splash.NewSplash(
+			logo,
+			image.Rectangle{
+				Min: image.Pt(10, size.Y-10),
+				Max: image.Pt(size.X-10, size.Y-5),
+			},
+			color.NRGBA{R: 100, G: 200, B: 100, A: 42},
+		)
+		progress := 0.0
 		go func() {
 			tick := time.NewTicker(50 * time.Millisecond)
 			defer tick.Stop()
@@ -52,6 +52,9 @@ func main() {
 					progress += 0.01
 					splashWidget.SetProgress(progress)
 					w.Invalidate()
+					if progress >= 1 {
+						return
+					}
 				}
 			}
 		}()
@@ -65,7 +68,6 @@ func main() {
 		}()
 
 		var ops op.Ops
-
 		for e := range w.Events() {
 			switch e := e.(type) {
 
