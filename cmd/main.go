@@ -6,6 +6,7 @@ import (
 	"gioui.org/io/system"
 	"gioui.org/layout"
 	"gioui.org/op"
+	"gioui.org/unit"
 	splash "github.com/gesellix/gioui-splash"
 	"github.com/gesellix/gioui-splash/assets"
 	"image"
@@ -24,8 +25,8 @@ func main() {
 		size := logo.Bounds().Size()
 
 		options := []app.Option{
-			//app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
-			app.Size(dpiAware.PxToDp(size.X), dpiAware.PxToDp(size.Y)),
+			app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
+			//app.Size(dpiAware.PxToDp(size.X), dpiAware.PxToDp(size.Y)),
 			app.Title("Splash Example"),
 			app.Decorated(false),
 		}
