@@ -2,6 +2,10 @@ package main
 
 import (
 	"fmt"
+	"image/color"
+	"os"
+	"time"
+
 	"gioui.org/app"
 	"gioui.org/io/system"
 	"gioui.org/layout"
@@ -9,10 +13,6 @@ import (
 	"gioui.org/unit"
 	splash "github.com/gesellix/gioui-splash"
 	"github.com/gesellix/gioui-splash/assets"
-	"image"
-	"image/color"
-	"os"
-	"time"
 )
 
 func main() {
@@ -23,26 +23,23 @@ func main() {
 			os.Exit(0)
 		}
 		size := logo.Bounds().Size()
+		sizeXDp := unit.Dp(size.X)
+		sizeYDp := unit.Dp(size.Y)
 
 		options := []app.Option{
-			app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
-			// see https://todo.sr.ht/~eliasnaur/gio/508
-			//app.Size(dpiAware.PxToDp(size.X), dpiAware.PxToDp(size.Y)),
+			app.Size(sizeXDp, sizeYDp),
+			app.MinSize(sizeXDp, sizeYDp),
+			app.MaxSize(sizeXDp, sizeYDp),
 			app.Title("Splash Example"),
 			app.Decorated(false),
 		}
 		w := app.NewWindow(options...)
-		//w := app.NewWindow()
-		//w.Option(options...)
 		w.Perform(system.ActionCenter)
-		//w.Perform(system.ActionRaise)
 
 		splashWidget := splash.NewSplash(
 			logo,
-			image.Rectangle{
-				Min: image.Pt(10, size.Y-10),
-				Max: image.Pt(size.X-10, size.Y-5),
-			},
+			5,  // Progress bar height is 5 Dp.
+			10, // Progress bar is inset 10 Dp from window edge.
 			color.NRGBA{R: 100, G: 200, B: 100, A: 42},
 		)
 		progress := 0.0
@@ -77,9 +74,6 @@ func main() {
 
 			case system.FrameEvent:
 				gtx := layout.NewContext(&ops, e)
-
-				//gtx.Constraints = layout.Exact(size)
-				//w.Option(app.Size(unit.Dp(size.X), unit.Dp(size.Y)))
 
 				splashDim := splashWidget.Layout(gtx)
 
