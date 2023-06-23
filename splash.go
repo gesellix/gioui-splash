@@ -18,11 +18,11 @@ type Splash struct {
 	progress       float64
 }
 
-func NewSplash(img image.Image, progressHeight unit.Dp, progressInset unit.Dp, progressCol color.NRGBA) *Splash {
+func NewSplash(img image.Image, progressHeight unit.Dp, progressInset layout.Inset, progressCol color.NRGBA) *Splash {
 	return &Splash{
 		img,
 		progressHeight,
-		layout.UniformInset(progressInset),
+		progressInset,
 		progressCol,
 		0,
 	}
