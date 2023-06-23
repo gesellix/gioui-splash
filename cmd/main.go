@@ -44,7 +44,7 @@ func main() {
 				Left:   109,
 				Right:  109,
 			}, // Progress bar is inset from the window's south edge.
-			color.NRGBA{R: 100, G: 200, B: 100, A: 42},
+			color.NRGBA{R: 100, G: 200, B: 100, A: 127},
 		)
 		progress := 0.0
 		go func() {
@@ -56,6 +56,9 @@ func main() {
 				case <-tick.C:
 					progress += 0.01
 					splashWidget.SetProgress(progress)
+					// The widget will not be updated until the next FrameEvent.
+					// We're going to trigger that event now, so that
+					// the changed progress will be visible.
 					w.Invalidate()
 					if progress >= 1 {
 						return
@@ -64,9 +67,10 @@ func main() {
 			}
 		}()
 
+		// This is a placeholder for any background process.
 		go func() {
 			duration := 5 * time.Second
-			fmt.Println("closing in", duration)
+			fmt.Println("background processing will be finished in", duration)
 			time.Sleep(duration)
 			w.Perform(system.ActionClose)
 			os.Exit(0)
