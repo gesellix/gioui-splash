@@ -21,7 +21,7 @@ gogio -x -target windows -ldflags "-s -w" -appid splash -icon appicon.png -o spl
 .\splash.exe
 ```
 
-## WebAssembly
+### WebAssembly
 
 ```shell
 gogio -x -target js -ldflags "-s -w" -appid splash -icon appicon.png -o wasm ./cmd
