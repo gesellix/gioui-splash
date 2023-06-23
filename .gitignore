@@ -1,6 +1,8 @@
+.idea/
 *.syso
 splash.exe
 splash
+splash_*.app/
 wasm/appicon.png
 wasm/index.html
 wasm/main.wasm

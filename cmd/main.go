@@ -26,6 +26,7 @@ func main() {
 
 		options := []app.Option{
 			app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
+			// see https://todo.sr.ht/~eliasnaur/gio/508
 			//app.Size(dpiAware.PxToDp(size.X), dpiAware.PxToDp(size.Y)),
 			app.Title("Splash Example"),
 			app.Decorated(false),

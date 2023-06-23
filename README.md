@@ -14,6 +14,14 @@ go run ./cmd
 go install gioui.org/cmd/gogio@latest
 ```
 
+### MacOS
+
+```shell
+gogio -x -target macos -ldflags "-s -w" -appid splash -icon appicon.png -o splash.app ./cmd
+open splash_arm64.app 
+#open splash_amd64.app 
+```
+
 ### Windows
 
 ```shell
