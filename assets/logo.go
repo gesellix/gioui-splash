@@ -7,7 +7,8 @@ import (
 )
 
 import (
-	_ "image/jpeg" // allow decoding/loading .jpg images
+	_ "golang.org/x/image/bmp" // allow decoding/loading .bmp images
+	_ "image/jpeg"             // allow decoding/loading .jpg images
 )
 
 //go:embed amadej-tauses-xWOTojs1eg4-unsplash.jpg
