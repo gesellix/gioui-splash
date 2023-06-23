@@ -74,11 +74,7 @@ func main() {
 
 			case system.FrameEvent:
 				gtx := layout.NewContext(&ops, e)
-
-				splashDim := splashWidget.Layout(gtx)
-
-				fmt.Printf("expected size: %v | splash dim: %v | actual gtx.Metric: %v gtx.Constraints %v e.Size %v e.Metric %v\n", size, splashDim, gtx.Metric, gtx.Constraints, e.Size, e.Metric)
-
+				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
 			}
 		}

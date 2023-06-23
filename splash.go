@@ -1,32 +1,30 @@
 package splash
 
 import (
-	"image"
-	"image/color"
-	"log"
-
 	"gioui.org/layout"
 	"gioui.org/op/clip"
 	"gioui.org/op/paint"
 	"gioui.org/unit"
 	"gioui.org/widget"
+	"image"
+	"image/color"
 )
 
 type Splash struct {
 	img            image.Image
 	progressHeight unit.Dp
+	progressInset  layout.Inset
 	progressCol    color.NRGBA
 	progress       float64
-	progressInset  layout.Inset
 }
 
 func NewSplash(img image.Image, progressHeight unit.Dp, progressInset unit.Dp, progressCol color.NRGBA) *Splash {
 	return &Splash{
 		img,
 		progressHeight,
+		layout.UniformInset(progressInset),
 		progressCol,
 		0,
-		layout.UniformInset(progressInset),
 	}
 }
 
@@ -74,7 +72,6 @@ func (s *Splash) drawProgress(gtx layout.Context) layout.Dimensions {
 			gtx.Dp(s.progressHeight),
 		),
 	}
-	log.Printf("spread: %v progress: %v minX: %v", spread, s.progress, gtx.Constraints.Min.X)
 	paint.FillShape(
 		gtx.Ops,
 		s.progressCol,
