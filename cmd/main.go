@@ -6,7 +6,6 @@ import (
 	"gioui.org/io/system"
 	"gioui.org/layout"
 	"gioui.org/op"
-	"gioui.org/unit"
 	splash "github.com/gesellix/gioui-splash"
 	"github.com/gesellix/gioui-splash/assets"
 	"image"
@@ -25,13 +24,16 @@ func main() {
 		size := logo.Bounds().Size()
 
 		options := []app.Option{
-			app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
+			//app.Size(unit.Dp(size.X), unit.Dp(size.Y)),
+			app.Size(dpiAware.PxToDp(size.X), dpiAware.PxToDp(size.Y)),
 			app.Title("Splash Example"),
 			app.Decorated(false),
 		}
 		w := app.NewWindow(options...)
+		//w := app.NewWindow()
 		//w.Option(options...)
 		w.Perform(system.ActionCenter)
+		//w.Perform(system.ActionRaise)
 
 		splashWidget := splash.NewSplash(
 			logo,
@@ -79,7 +81,7 @@ func main() {
 
 				splashDim := splashWidget.Layout(gtx)
 
-				fmt.Printf("expected size: %v | splash dim: %v | actual gtx.Metric: %v gtx.Constraints %v e.size %v\n", size, splashDim, gtx.Metric, gtx.Constraints, e.Size)
+				fmt.Printf("expected size: %v | splash dim: %v | actual gtx.Metric: %v gtx.Constraints %v e.Size %v e.Metric %v\n", size, splashDim, gtx.Metric, gtx.Constraints, e.Size, e.Metric)
 
 				e.Frame(gtx.Ops)
 			}
