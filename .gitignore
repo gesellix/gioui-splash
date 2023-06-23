@@ -1,0 +1,7 @@
+*.syso
+splash.exe
+splash
+wasm/appicon.png
+wasm/index.html
+wasm/main.wasm
+wasm/wasm.js
