@@ -18,10 +18,10 @@ type Splash struct {
 	progress       float64
 }
 
-func NewSplash(img image.Image, progressHeight unit.Dp, progressInset layout.Inset, progressCol color.NRGBA) *Splash {
+func NewSplash(img image.Image, progressInset layout.Inset, progressCol color.NRGBA) *Splash {
 	return &Splash{
 		img,
-		progressHeight,
+		progressInset.Bottom - progressInset.Top,
 		progressInset,
 		progressCol,
 		0,
@@ -60,13 +60,13 @@ func (s *Splash) drawLogo(gtx layout.Context) layout.Dimensions {
 }
 
 func (s *Splash) drawProgress(gtx layout.Context) layout.Dimensions {
-	// Our gtx.Constraints.Min.X provide the width that a full progress bar
-	// must occupy.
+	// Our gtx.Constraints.Min.X provide the width
+	// that a full progress bar must occupy.
 	spread := gtx.Constraints.Min.X
 	rectangle := image.Rectangle{
 		Max: image.Pt(
-			// Since spread is already a unit of screen pixels, no need to pass through gtx.Dp
-			// to convert to them.
+			// Since spread is already a unit of screen pixels,
+			// no need to pass through gtx.Dp to convert to them.
 			int(float64(spread)*s.progress),
 			// Convert our progress bar height to screen pixels.
 			gtx.Dp(s.progressHeight),
@@ -76,8 +76,8 @@ func (s *Splash) drawProgress(gtx layout.Context) layout.Dimensions {
 		gtx.Ops,
 		s.progressCol,
 		clip.Rect(rectangle).Op())
-	// Return the logical dimensions occupied by the progress bar, which is the width of a full
-	// bar.
+	// Return the logical dimensions occupied by the progress bar,
+	// which is the width of a full bar.
 	return layout.Dimensions{
 		Size: image.Point{
 			X: gtx.Constraints.Min.X,

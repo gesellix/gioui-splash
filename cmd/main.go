@@ -38,12 +38,13 @@ func main() {
 
 		splashWidget := splash.NewSplash(
 			logo,
-			5, // Progress bar height is 5 Dp.
+			// (Bottom-Top) sets the height of the progress bar
 			layout.Inset{
-				Bottom: 71,
-				Left:   109,
-				Right:  109,
-			}, // Progress bar is inset from the window's south edge.
+				Top:    5,
+				Bottom: 10,
+				Left:   10,
+				Right:  10,
+			},
 			color.NRGBA{R: 100, G: 200, B: 100, A: 127},
 		)
 		progress := 0.0
