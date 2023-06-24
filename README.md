@@ -19,6 +19,8 @@ A minimal example can be run like this:
 go run github.com/gesellix/gioui-splash/cmd@latest
 ```
 
+https://github.com/gesellix/gioui-splash/assets/432791/186c12ee-6d23-493a-b1d3-899c083f60c4
+
 The example should work on any platform supported by Gio UI, including WebAssembly. See below for details.
 
 ## Build and package with gogio
