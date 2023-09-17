@@ -7,3 +7,4 @@ wasm/appicon.png
 wasm/index.html
 wasm/main.wasm
 wasm/wasm.js
+*-bad.png
