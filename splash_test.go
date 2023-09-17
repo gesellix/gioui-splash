@@ -90,7 +90,7 @@ func newTestWindow(t *testing.T, sz image.Point) (*headless.Window, func()) {
 	t.Helper()
 	w, err := headless.NewWindow(sz.X, sz.Y)
 	if err != nil {
-		t.Skipf("headless windows not supported: %v", err)
+		t.Errorf("headless windows not supported: %v", err)
 	}
 	return w, func() {
 		w.Release()

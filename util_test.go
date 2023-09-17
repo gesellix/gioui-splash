@@ -296,7 +296,7 @@ func saveImage(t testing.TB, file string, img *image.RGBA) {
 func newWindow(t testing.TB, width, height int) *headless.Window {
 	w, err := headless.NewWindow(width, height)
 	if err != nil {
-		t.Skipf("failed to create headless window, skipping: %v", err)
+		t.Errorf("failed to create headless window, skipping: %v", err)
 	}
 	return w
 }
