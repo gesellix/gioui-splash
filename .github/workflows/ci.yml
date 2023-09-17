@@ -31,6 +31,5 @@ jobs:
           echo "CGO_ENABLED=0" >> $GITHUB_ENV
 
       - name: Check
-        working-directory: gio
         run: go test -v ./...
 ...
