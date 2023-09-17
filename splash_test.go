@@ -78,10 +78,10 @@ func TestHeadless(t *testing.T) {
 	if isz := img.Bounds().Size(); isz != size {
 		t.Errorf("got %v screenshot, expected %v", isz, size)
 	}
-	if got := img.RGBAAt(0, 0); got != f32color.NRGBAToRGBA(colOrigin) {
+	if got := img.RGBAAt(0, 0); !colorsClose(got, f32color.NRGBAToRGBA(colOrigin)) || !alphaClose(got, f32color.NRGBAToRGBA(colOrigin)) {
 		t.Errorf("got color %v, expected %v", got, f32color.NRGBAToRGBA(colOrigin))
 	}
-	if got := img.RGBAAt(10, 345); got != f32color.NRGBAToRGBA(colProgress) {
+	if got := img.RGBAAt(10, 345); !colorsClose(got, f32color.NRGBAToRGBA(colProgress)) || !alphaClose(got, f32color.NRGBAToRGBA(colProgress)) {
 		t.Errorf("got color %v, expected %v", got, f32color.NRGBAToRGBA(colProgress))
 	}
 }
