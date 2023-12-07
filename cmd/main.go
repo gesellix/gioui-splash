@@ -78,13 +78,14 @@ func main() {
 		}()
 
 		var ops op.Ops
-		for e := range w.Events() {
-			switch e := e.(type) {
-
+		for {
+			switch e := w.NextEvent().(type) {
 			case system.FrameEvent:
 				gtx := layout.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
+			case system.DestroyEvent:
+				// Omitted
 			}
 		}
 	}()
