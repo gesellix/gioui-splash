@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	gioui.org v0.4.1
-	golang.org/x/image v0.14.0
+	golang.org/x/image v0.15.0
 )
 
 require (
