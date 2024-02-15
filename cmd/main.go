@@ -80,11 +80,11 @@ func main() {
 		var ops op.Ops
 		for {
 			switch e := w.NextEvent().(type) {
-			case system.FrameEvent:
-				gtx := layout.NewContext(&ops, e)
+			case app.FrameEvent:
+				gtx := app.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
-			case system.DestroyEvent:
+			case app.DestroyEvent:
 				// Omitted
 			}
 		}

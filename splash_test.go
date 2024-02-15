@@ -1,8 +1,8 @@
 package splash
 
 import (
+	"gioui.org/app"
 	"gioui.org/gpu/headless"
-	"gioui.org/io/system"
 	"gioui.org/layout"
 	"gioui.org/op"
 	"gioui.org/unit"
@@ -30,7 +30,7 @@ func TestRender(t *testing.T) {
 	run(t,
 		size,
 		func(ops *op.Ops) {
-			splash.Layout(layout.NewContext(ops, system.FrameEvent{
+			splash.Layout(app.NewContext(ops, app.FrameEvent{
 				Size:   size,
 				Metric: unit.Metric{PxPerDp: 1},
 			}))
@@ -61,7 +61,7 @@ func TestHeadless(t *testing.T) {
 		color.NRGBA{R: 100, G: 200, B: 100, A: 127},
 	)
 	splash.SetProgress(0.5)
-	splash.Layout(layout.NewContext(&ops, system.FrameEvent{
+	splash.Layout(app.NewContext(&ops, app.FrameEvent{
 		Size:   size,
 		Metric: unit.Metric{PxPerDp: 1},
 	}))
