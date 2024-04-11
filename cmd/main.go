@@ -33,7 +33,8 @@ func main() {
 			app.Title("Splash Example"),
 			app.Decorated(false),
 		}
-		w := app.NewWindow(options...)
+		w := app.Window{}
+		w.Option(options...)
 		w.Perform(system.ActionCenter)
 
 		splashWidget := splash.NewSplash(
@@ -79,7 +80,7 @@ func main() {
 
 		var ops op.Ops
 		for {
-			switch e := w.NextEvent().(type) {
+			switch e := w.Event().(type) {
 			case app.FrameEvent:
 				gtx := app.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
