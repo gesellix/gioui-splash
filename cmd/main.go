@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"image/color"
 	"os"
+	"sync"
 	"time"
 
 	"gioui.org/app"
@@ -82,6 +83,11 @@ func main() {
 		for {
 			switch e := w.Event().(type) {
 			case app.FrameEvent:
+				// TODO remove after update to gioui.org > v0.6.0
+				// to use the proper fix from https://todo.sr.ht/~eliasnaur/gio/575
+				sync.OnceFunc(func() {
+					w.Option(options...)
+				})()
 				gtx := app.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
