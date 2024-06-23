@@ -6,7 +6,7 @@ toolchain go1.22.3
 
 require (
 	gioui.org v0.6.0
-	golang.org/x/image v0.16.0
+	golang.org/x/image v0.17.0
 )
 
 require (
@@ -16,5 +16,5 @@ require (
 	golang.org/x/exp v0.0.0-20231206192017-f3f8817b8deb // indirect
 	golang.org/x/exp/shiny v0.0.0-20231206192017-f3f8817b8deb // indirect
 	golang.org/x/sys v0.15.0 // indirect
-	golang.org/x/text v0.15.0 // indirect
+	golang.org/x/text v0.16.0 // indirect
 )
