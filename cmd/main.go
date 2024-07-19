@@ -79,15 +79,18 @@ func main() {
 			os.Exit(0)
 		}()
 
+		// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
+		// this should only be required shortly after creating the window w.
+		performCenter := sync.OnceFunc(func() {
+			w.Perform(system.ActionCenter)
+		})
 		var ops op.Ops
 		for {
 			switch e := w.Event().(type) {
 			case app.FrameEvent:
-				// TODO remove after update to gioui.org > v0.6.0
-				// to use the proper fix from https://todo.sr.ht/~eliasnaur/gio/575
-				sync.OnceFunc(func() {
-					w.Option(options...)
-				})()
+				// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
+				// this should only be required shortly after creating the window w.
+				performCenter()
 				gtx := app.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
