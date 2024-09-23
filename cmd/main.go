@@ -81,7 +81,8 @@ func main() {
 
 		// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
 		// this should only be required shortly after creating the window w.
-		performCenter := sync.OnceFunc(func() {
+		applyOptions := sync.OnceFunc(func() {
+			w.Option(app.Decorated(false))
 			w.Perform(system.ActionCenter)
 		})
 		var ops op.Ops
@@ -90,7 +91,7 @@ func main() {
 			case app.FrameEvent:
 				// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
 				// this should only be required shortly after creating the window w.
-				performCenter()
+				applyOptions()
 				gtx := app.NewContext(&ops, e)
 				splashWidget.Layout(gtx)
 				e.Frame(gtx.Ops)
