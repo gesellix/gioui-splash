@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image/color"
 	"os"
-	"sync"
 	"time"
 
 	"gioui.org/app"
@@ -81,13 +80,22 @@ func main() {
 
 		// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
 		// this should only be required shortly after creating the window w.
-		applyOptions := sync.OnceFunc(func() {
+		applyOptions := func() {
 			w.Option(app.Decorated(false))
 			w.Perform(system.ActionCenter)
-		})
+		}
+		//applyOptions := sync.OnceFunc(func() {
+		//	w.Option(app.Decorated(false))
+		//	w.Perform(system.ActionCenter)
+		//})
 		var ops op.Ops
 		for {
 			switch e := w.Event().(type) {
+			//case app.ConfigEvent:
+			//	TODO work around https://todo.sr.ht/~eliasnaur/gio/602
+			//	this should only be required shortly after creating the window w.
+			//go applyOptions()
+
 			case app.FrameEvent:
 				// TODO work around https://todo.sr.ht/~eliasnaur/gio/602
 				// this should only be required shortly after creating the window w.
