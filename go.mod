@@ -1,7 +1,6 @@
 module github.com/gesellix/gioui-splash
 
-go 1.22
-toolchain go1.23.7
+go 1.24.0
 
 require (
 	gioui.org v0.8.0
