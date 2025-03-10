@@ -1,12 +1,11 @@
 module github.com/gesellix/gioui-splash
 
 go 1.22
-
-toolchain go1.22.3
+toolchain go1.23.7
 
 require (
 	gioui.org v0.8.0
-	golang.org/x/image v0.24.0
+	golang.org/x/image v0.25.0
 )
 
 require (
@@ -15,5 +14,5 @@ require (
 	golang.org/x/exp v0.0.0-20240707233637-46b078467d37 // indirect
 	golang.org/x/exp/shiny v0.0.0-20240707233637-46b078467d37 // indirect
 	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/text v0.22.0 // indirect
+	golang.org/x/text v0.23.0 // indirect
 )
