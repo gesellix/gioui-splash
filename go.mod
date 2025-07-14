@@ -4,7 +4,7 @@ go 1.24.0
 
 require (
 	gioui.org v0.8.0
-	golang.org/x/image v0.28.0
+	golang.org/x/image v0.29.0
 )
 
 require (
@@ -13,5 +13,5 @@ require (
 	golang.org/x/exp v0.0.0-20240707233637-46b078467d37 // indirect
 	golang.org/x/exp/shiny v0.0.0-20240707233637-46b078467d37 // indirect
 	golang.org/x/sys v0.26.0 // indirect
-	golang.org/x/text v0.26.0 // indirect
+	golang.org/x/text v0.27.0 // indirect
 )
