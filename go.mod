@@ -4,7 +4,7 @@ go 1.25.5
 
 require (
 	gioui.org v0.9.0
-	golang.org/x/image v0.37.0
+	golang.org/x/image v0.38.0
 )
 
 require (
