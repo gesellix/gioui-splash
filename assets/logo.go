@@ -22,7 +22,7 @@ func GetLogo() (image.Image, error) {
 	if err != nil {
 		return nil, fmt.Errorf("failed opening image file: %w", err)
 	}
-	defer logo.Close()
+	defer func() { _ = logo.Close() }()
 	imgData, _ /* format */, err := image.Decode(logo)
 	if err != nil {
 		return nil, fmt.Errorf("failed decoding image data: %w", err)
