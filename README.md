@@ -61,7 +61,7 @@ A fresh clone can be run like this:
 
 ```shell
 git clone git@github.com:/gesellix/gioui-splash.git
-cd guiui-splash
+cd gioui-splash
 go run ./cmd
 ```
 
@@ -78,4 +78,4 @@ MIT License
 
 ## Notes
 
-Thanks to the Gui UI developers for the great project! Please head over to https://gioui.org/doc/contribute if you want to support their work.
+Thanks to the Gio UI developers for the great project! Please head over to https://gioui.org/doc/contribute if you want to support their work.
