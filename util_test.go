@@ -20,7 +20,6 @@ import (
 
 	"golang.org/x/image/colornames"
 
-	"gioui.org/f32"
 	"gioui.org/gpu/headless"
 	"gioui.org/op"
 	"gioui.org/op/paint"
@@ -31,16 +30,6 @@ var (
 	dumpTestImages = flag.Bool("savetestimages", true, "save test images")
 	squares        paint.ImageOp
 	smallSquares   paint.ImageOp
-)
-
-var (
-	red         = f32color.RGBAToNRGBA(colornames.Red)
-	green       = f32color.RGBAToNRGBA(colornames.Green)
-	blue        = f32color.RGBAToNRGBA(colornames.Blue)
-	magenta     = f32color.RGBAToNRGBA(colornames.Magenta)
-	black       = f32color.RGBAToNRGBA(colornames.Black)
-	white       = f32color.RGBAToNRGBA(colornames.White)
-	transparent = color.RGBA{}
 )
 
 func init() {
@@ -93,53 +82,6 @@ func run(t *testing.T, size image.Point, f func(o *op.Ops), c func(r result)) {
 			saveImage(t, name, img)
 		}
 		c(result{t: t, img: img})
-	}
-}
-
-func frame(f func(o *op.Ops), c func(r result)) frameT {
-	return frameT{f: f, c: c}
-}
-
-type frameT struct {
-	f func(o *op.Ops)
-	c func(r result)
-}
-
-// multiRun is used to run test cases over multiple frames, typically
-// to test caching interactions.
-func multiRun(t *testing.T, frames ...frameT) {
-	// draw a few times and check that it is correct each time, to
-	// ensure any caching effects still generate the correct images.
-	var err error
-	sz := image.Point{X: 128, Y: 128}
-	w := newWindow(t, sz.X, sz.Y)
-	defer w.Release()
-	ops := new(op.Ops)
-	for i := range frames {
-		ops.Reset()
-		frames[i].f(ops)
-		if err := w.Frame(ops); err != nil {
-			t.Errorf("rendering failed: %v", err)
-			continue
-		}
-		img := image.NewRGBA(image.Rectangle{Max: sz})
-		err = w.Screenshot(img)
-		if err != nil {
-			t.Errorf("screenshot failed: %v", err)
-			continue
-		}
-		// Check for a reference image and make sure they are identical.
-		ok := verifyRef(t, img, i)
-		if frames[i].c != nil {
-			frames[i].c(result{t: t, img: img})
-		}
-		if !ok {
-			name := t.Name() + ".png"
-			if i != 0 {
-				name = t.Name() + "_" + strconv.Itoa(i) + ".png"
-			}
-			saveImage(t, name, img)
-		}
 	}
 }
 
@@ -254,17 +196,6 @@ func yiqEqApprox(c1, c2 color.RGBA, d2 float64) bool {
 	return diff <= max*d2
 }
 
-func (r result) expect(x, y int, col color.RGBA) {
-	r.t.Helper()
-	if r.img == nil {
-		return
-	}
-	c := r.img.RGBAAt(x, y)
-	if !colorsClose(c, col) {
-		r.t.Error("expected ", col, " at ", "(", x, ",", y, ") but got ", c)
-	}
-}
-
 type result struct {
 	t   *testing.T
 	img *image.RGBA
@@ -301,6 +232,3 @@ func newWindow(t testing.TB, width, height int) *headless.Window {
 	return w
 }
 
-func scale(sx, sy float32) op.TransformOp {
-	return op.Affine(f32.Affine2D{}.Scale(f32.Point{}, f32.Pt(sx, sy)))
-}

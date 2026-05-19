@@ -53,18 +53,15 @@ func main() {
 			tick := time.NewTicker(50 * time.Millisecond)
 			defer tick.Stop()
 
-			for {
-				select {
-				case <-tick.C:
-					progress += 0.01
-					splashWidget.SetProgress(progress)
-					// The widget will not be updated until the next FrameEvent.
-					// We're going to trigger that event now, so that
-					// the changed progress will be visible.
-					w.Invalidate()
-					if progress >= 1 {
-						return
-					}
+			for range tick.C {
+				progress += 0.01
+				splashWidget.SetProgress(progress)
+				// The widget will not be updated until the next FrameEvent.
+				// We're going to trigger that event now, so that
+				// the changed progress will be visible.
+				w.Invalidate()
+				if progress >= 1 {
+					return
 				}
 			}
 		}()
