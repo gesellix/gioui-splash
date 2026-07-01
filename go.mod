@@ -3,7 +3,7 @@ module github.com/gesellix/gioui-splash
 go 1.26.3
 
 require (
-	gioui.org v0.10.0
+	gioui.org v0.10.1
 	golang.org/x/image v0.43.0
 )
 
